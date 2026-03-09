@@ -87,6 +87,9 @@ module Xcodeproj::Project::Object
   
     def to_dependency
       # We return both as we don't know if build as library or framework
+      if name == 'TensorFlowLiteSwift'
+        return [PodDependency.newFramework('TensorFlowLite'), PodDependency.newLibrary('TensorFlowLite')]
+      end
       return [PodDependency.newFramework(module_name), PodDependency.newLibrary(name)]
     end
   
